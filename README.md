@@ -1,10 +1,9 @@
-## gradle-archetype-plugin [![Build Status](https://travis-ci.org/orctom/gradle-archetype-plugin.svg)](https://travis-ci.org/orctom/gradle-archetype-plugin)
+## gradle-archetype-plugin
 
 Maven archetype like plugin for Gradle.
 Generating projects from local template.
 
 ### Install
-https://plugins.gradle.org/plugin/com.orctom.archetype
 
 ### Tasks
  * `cleanArchetype`: cleans the generated folders and files.
@@ -29,6 +28,12 @@ Following parameters will be asked, if not available in system properties
 | group           | group name in Gradle or Maven, *Mandatory*          |                                |
 | name            | name in Gradle, of artifactId in Maven, *Mandatory* |                                |
 | version         | version in Gradle or Maven, *Mandatory*             | 1.0-SNAPSHOT                   |
+| author          | author, *Mandatory*                                 | Administrator                  |
+| port            | service port, *Mandatory*                           | 8080                           |
+| contextPath     | service context path, *Mandatory*                   | /                              |
+| configServerName| service config server name, *Mandatory*             | config-server                  |
+| configServerPort| service config server port, *Mandatory*             | 8888                           |
+
 
 #### Won't Be Prompted
 Following parameters will NOT be prompted, if not available in system properties.
@@ -49,17 +54,18 @@ Parameters will firstly been searched in System Properties, which includes:
 ### Variables:
 Variables that can be used in template files.
 
-| name         | description                                        | sample                |
-| ------------ | -------------------------------------------------- | --------------------- |
-| group        | project.group                                      | com.xxx.yyy           |
-| name         | project.name                                       | dummy-app             |
-| version      | project.version                                    | 1.0-SNAPSHOT          |
-| projectName  | project.name                                       | dummy-app             |
-| namePackage  | replaced non-characters with '.' in name           | dummy.app             |
-| namePath     | replaced non-characters with '/' in name           | dummy/app             |
-| groupPath    | replaced '.' with '/' in group                     | com/xxx/yyy           |
-| packageName  | (group + name) replaced non-characters with '.'    | com.xxx.yyy.dummy.app |
-| packagePath  | replaced '.' with '/' in packageName               | com/xxx/yyy/dummy/app |
+| name               | description                                        | sample                |
+| -------------------| -------------------------------------------------- | --------------------- |
+| groupId            | project.group                                      | com.oppo.csc          |
+| artifactId         | project.name                                       | csc-service-demo      |
+| version            | project.version                                    | 1.0.0-SNAPSHOT        |
+| author             | project.author                                     | Administrator         |
+| servicePort        | servicePort                                        | 8080                  |
+| serviceContextPath | serviceContextPath                                 | /                     |
+| configServerName   | configServerName                                   | config-server         |
+| configServerPort   | configServerPort                                   | 8888                  |
+| cscPackageName     | cscPackageName                                     | com.oppo.csc.demo     |
+| cscPackagePath     | cscPackagePath                                     | com/oppo/csc/demo     |
 
 #### Adding Custom variables
 Extra variables can be added via command line or programmatically with the
@@ -72,7 +78,7 @@ Command line :
 
 Property prefix :
 ```
-System.setProperty('com.orctom.gradle.archetype.binding.param1', value1)
+System.setProperty('com.oppo.csc.gradle.archetype.binding.param1', value1)
 ```
 
 #### Programmatic Customization of Bindings
@@ -133,13 +139,16 @@ gradlew.bat
 It follows ant style. The tailing slash for directory is mandatory.
 
 ### Sample
-https://github.com/orctom/gradle-archetype-plugin/tree/master/src/test/resources/sample
+http://lvyue.ncoppo.com:66/csc/structure/scaffold/csc-service-archetype/tree/master/src/main/resources/templates
 
 ### Known Issues
  * Doesn't work with property files that have such escapes: key=https`\`://aaa.bbb.ccc/xxx, remove the `\` escape to have it work.
  * In interactive mode, the prompt text got truncated sometimes.
 
 ### Change Logs
+#### 1.4.7
+ * 改造使之符合oppo体系的代码
+
 #### 1.4.6.3
  * Fixed issue [#19](https://github.com/orctom/gradle-archetype-plugin/pull/19) blank lines and comments support in `.nontemplate`
 
