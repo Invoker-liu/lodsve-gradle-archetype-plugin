@@ -4,6 +4,7 @@ Maven archetype like plugin for Gradle.
 Generating projects from local template.
 
 ### Install
+https://plugins.gradle.org/plugin/com.lodsve.archetype
 
 ### Tasks
  * `cleanArchetype`: cleans the generated folders and files.
@@ -56,16 +57,16 @@ Variables that can be used in template files.
 
 | name               | description                                        | sample                |
 | -------------------| -------------------------------------------------- | --------------------- |
-| groupId            | project.group                                      | com.oppo.csc          |
-| artifactId         | project.name                                       | csc-service-demo      |
+| groupId            | project.group                                      | com.lodsve            |
+| artifactId         | project.name                                       | service-demo          |
 | version            | project.version                                    | 1.0.0-SNAPSHOT        |
 | author             | project.author                                     | Administrator         |
 | servicePort        | servicePort                                        | 8080                  |
 | serviceContextPath | serviceContextPath                                 | /                     |
 | configServerName   | configServerName                                   | config-server         |
 | configServerPort   | configServerPort                                   | 8888                  |
-| cscPackageName     | cscPackageName                                     | com.oppo.csc.demo     |
-| cscPackagePath     | cscPackagePath                                     | com/oppo/csc/demo     |
+| cscPackageName     | cscPackageName                                     | com.lodsve.demo       |
+| cscPackagePath     | cscPackagePath                                     | com/lodsve/demo       |
 
 #### Adding Custom variables
 Extra variables can be added via command line or programmatically with the
@@ -78,7 +79,7 @@ Command line :
 
 Property prefix :
 ```
-System.setProperty('com.oppo.csc.gradle.archetype.binding.param1', value1)
+System.setProperty('com.lodsve.gradle.archetype.binding.param1', value1)
 ```
 
 #### Programmatic Customization of Bindings
@@ -138,16 +139,13 @@ gradlew.bat
 
 It follows ant style. The tailing slash for directory is mandatory.
 
-### Sample
-http://lvyue.ncoppo.com:66/csc/structure/scaffold/csc-service-archetype/tree/master/src/main/resources/templates
-
 ### Known Issues
  * Doesn't work with property files that have such escapes: key=https`\`://aaa.bbb.ccc/xxx, remove the `\` escape to have it work.
  * In interactive mode, the prompt text got truncated sometimes.
 
 ### Change Logs
 #### 1.4.7
- * 改造使之符合oppo体系的代码
+ * 改造使之符合要求
 
 #### 1.4.6.3
  * Fixed issue [#19](https://github.com/orctom/gradle-archetype-plugin/pull/19) blank lines and comments support in `.nontemplate`

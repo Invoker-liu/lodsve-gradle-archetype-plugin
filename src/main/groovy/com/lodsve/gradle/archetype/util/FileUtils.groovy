@@ -1,6 +1,6 @@
-package com.oppo.csc.gradle.archetype.util
+package com.lodsve.gradle.archetype.util
 
-import com.oppo.csc.gradle.archetype.ArchetypePlugin
+import com.lodsve.gradle.archetype.ArchetypePlugin
 import groovy.io.FileType
 import groovy.text.GStringTemplateEngine
 import org.gradle.api.logging.Logger

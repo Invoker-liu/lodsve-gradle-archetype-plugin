@@ -1,4 +1,4 @@
-package com.oppo.csc.gradle.archetype.util
+package com.lodsve.gradle.archetype.util
 
 class ConsoleUtils {
 

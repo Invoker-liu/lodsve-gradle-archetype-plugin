@@ -1,6 +1,6 @@
-package com.oppo.csc.gradle.archetype
+package com.lodsve.gradle.archetype
 
-import com.oppo.csc.gradle.archetype.util.FileUtils
+import com.lodsve.gradle.archetype.util.FileUtils
 import org.gradle.api.DefaultTask
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging

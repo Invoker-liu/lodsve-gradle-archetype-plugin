@@ -1,7 +1,7 @@
-package com.oppo.csc.gradle.archetype
+package com.lodsve.gradle.archetype
 
-import com.oppo.csc.gradle.archetype.util.ConsoleUtils
-import com.oppo.csc.gradle.archetype.util.FileUtils
+import com.lodsve.gradle.archetype.util.ConsoleUtils
+import com.lodsve.gradle.archetype.util.FileUtils
 import org.gradle.api.DefaultTask
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
@@ -24,8 +24,8 @@ class ArchetypeGenerateTask extends DefaultTask {
 
     @TaskAction
     create() {
-        String projectGroup = getParam('group', 'Please enter the group name. Ex: com.oppo.csc')
-        String projectName = getParam('name', 'Please enter the project name. Ex: csc-service-demo')
+        String projectGroup = getParam('group', 'Please enter the group name.')
+        String projectName = getParam('name', 'Please enter the project name.')
         String projectVersion = getParam('version', 'Please enter the version name', '1.0.0-SNAPSHOT')
         String author = getParam('author', 'Please enter the your name', 'Administrator')
         String servicePort = getParam('port', 'Please enter the service port', '8080')
@@ -85,7 +85,7 @@ class ArchetypeGenerateTask extends DefaultTask {
     }
 
     private static void addPropertyScopedBindings(binding) {
-        final String propertyBinding = "com.oppo.csc.gradle.archetype.binding"
+        final String propertyBinding = "com.lodsve.gradle.archetype.binding"
         final int scopeSize = propertyBinding.length() + 1
         System.getProperties().findAll { p -> p.key.startsWith(propertyBinding) }
                 .each { p -> binding.put(p.key.substring(scopeSize), p.value) }

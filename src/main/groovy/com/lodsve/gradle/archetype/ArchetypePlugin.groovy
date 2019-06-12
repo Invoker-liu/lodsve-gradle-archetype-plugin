@@ -1,4 +1,4 @@
-package com.oppo.csc.gradle.archetype
+package com.lodsve.gradle.archetype
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

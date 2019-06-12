@@ -9,10 +9,8 @@ apply plugin: 'groovy'
 apply plugin: 'java-gradle-plugin'
 apply plugin: 'maven'
 apply plugin: 'idea'
-apply plugin: 'maven-publish'
 
 repositories {
-    maven { url 'http://lvyue.ncoppo.com:8081/repository/maven-public/' }
     mavenLocal()
     mavenCentral()
     jcenter()
@@ -24,68 +22,16 @@ dependencies {
 }
 
 pluginBundle {
-    website = 'http://lvyue.ncoppo.com:66/csc/structure/scaffold/gradle-archetype-plugin'
-    vcsUrl = 'http://lvyue.ncoppo.com:66/csc/structure/scaffold/gradle-archetype-plugin'
+    website = 'https://github.com/sunhao-java/gradle-archetype-plugin'
+    vcsUrl = 'https://github.com/sunhao-java/gradle-archetype-plugin'
 
     description = 'Gradle plugin that generate projects from template.'
     tags = ['archetype', 'template']
 
     plugins {
         plugin {
-            id = 'com.oppo.csc.archetype'
+            id = 'com.lodsve.archetype'
             displayName = 'Archetype Generate Plugin'
         }
     }
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
-
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier = 'sources'
-}
-
-task javadocJar(type: Jar) {
-    from javadoc
-    classifier = 'javadoc'
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = project.group
-            artifactId = project.name
-            version = project.version
-
-            artifact sourcesJar
-            artifact javadocJar
-
-            from components.java
-
-        }
-    }
-    repositories {
-        maven {
-            def baseRepoUrl = "http://lvyue.ncoppo.com:8081/repository"
-            def releasesRepoUrl = "$baseRepoUrl/csc-release"
-            def snapshotsRepoUrl = "$baseRepoUrl/csc-snapshots"
-
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-            credentials {
-                username = getRepositoryUsername()
-                password = getRepositoryPassword()
-            }
-        }
-        mavenLocal()
-    }
-}
-
-def getRepositoryUsername() {
-    return hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : ""
-}
-
-def getRepositoryPassword() {
-    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
 }
