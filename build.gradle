@@ -31,7 +31,7 @@ gradlePlugin {
 }
 
 pluginBundle {
-    website = 'https://github.com/sunhao-java/gradle-archetype-plugin'
-    vcsUrl = 'https://github.com/sunhao-java/gradle-archetype-plugin.git'
+    website = 'https://github.com/lodsve/gradle-archetype-plugin'
+    vcsUrl = 'https://github.com/lodsve/gradle-archetype-plugin.git'
     tags = ['archetype', 'template']
 }
