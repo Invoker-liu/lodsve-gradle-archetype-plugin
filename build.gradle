@@ -1,35 +1,37 @@
 plugins {
-    id "com.gradle.plugin-publish" version "0.9.7"
-    id 'net.researchgate.release' version '2.3.4'
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.10.0'
 }
 
-apply plugin: 'groovy'
-apply plugin: 'java-gradle-plugin'
-apply plugin: 'maven'
-apply plugin: 'idea'
+group 'com.lodsve.archetype'
+version '1.0.0'
+
+sourceCompatibility = 1.8
 
 repositories {
-    mavenLocal()
     mavenCentral()
-    jcenter()
 }
 
 dependencies {
-    compile gradleApi()
-    compile localGroovy()
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+gradlePlugin {
+    plugins {
+        archetypePlugin {
+            id = 'com.lodsve.archetype'
+            displayName = 'Archetype-Generate-Plugin'
+            description = 'Gradle plugin that generate projects from template.'
+            version = '1.0.0'
+            implementationClass = 'com.lodsve.gradle.archetype.ArchetypePlugin'
+        }
+    }
 }
 
 pluginBundle {
     website = 'https://github.com/sunhao-java/gradle-archetype-plugin'
-    vcsUrl = 'https://github.com/sunhao-java/gradle-archetype-plugin'
-
-    description = 'Gradle plugin that generate projects from template.'
+    vcsUrl = 'https://github.com/sunhao-java/gradle-archetype-plugin.git'
     tags = ['archetype', 'template']
-
-    plugins {
-        plugin {
-            id = 'com.lodsve.archetype'
-            displayName = 'Archetype Generate Plugin'
-        }
-    }
 }
