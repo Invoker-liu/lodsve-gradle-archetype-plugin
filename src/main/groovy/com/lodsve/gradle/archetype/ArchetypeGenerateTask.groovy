@@ -28,22 +28,18 @@ class ArchetypeGenerateTask extends DefaultTask {
         String projectName = getParam('name', 'Please enter the project name.')
         String projectVersion = getParam('version', 'Please enter the version name', '1.0.0-SNAPSHOT')
         String author = getParam('author', 'Please enter the your name', 'Administrator')
-        String servicePort = getParam('port', 'Please enter the service port', '8080')
-        String serviceContextPath = getParam('contextPath', 'Please enter the service context path', '/')
-        String configServerName = getParam('configServerName', 'Please enter the service config server name', 'config-server')
-        String configServerPort = getParam('configServerPort', 'Please enter the service config server port', '8888')
+        String port = getParam('port', 'Please enter the service port', '8080')
+        String contextPath = getParam('contextPath', 'Please enter the service context path', '/')
 
         String templatePath = System.getProperty('templates', ArchetypePlugin.DIR_TEMPLATES)
 
         Map binding = [
-                'groupId'           : projectGroup,
-                'artifactId'        : projectName,
-                'version'           : projectVersion,
-                'author'            : author,
-                'servicePort'       : servicePort,
-                'serviceContextPath': serviceContextPath,
-                'configServerName'  : configServerName,
-                'configServerPort'  : configServerPort
+                'groupId'    : projectGroup,
+                'artifactId' : projectName,
+                'version'    : projectVersion,
+                'author'     : author,
+                'port'       : port,
+                'contextPath': contextPath
         ]
         extendedBinding(binding)
 
@@ -64,10 +60,10 @@ class ArchetypeGenerateTask extends DefaultTask {
 
         String[] temp = artifactId.tokenize("-")
         String lastPackageName = (0 == temp.length) ? artifactId : temp[temp.length - 1]
-        String cscPackageName = groupId + "." + lastPackageName
+        String packageName = groupId + "." + lastPackageName
 
-        !binding.containsKey('cscPackageName') && binding.put('cscPackageName', cscPackageName)
-        !binding.containsKey('cscPackagePath') && binding.put('cscPackagePath', cscPackageName.replaceAll("\\.", "/"))
+        !binding.containsKey('packageName') && binding.put('packageName', packageName)
+        !binding.containsKey('packagePath') && binding.put('packagePath', packageName.replaceAll("\\.", "/"))
     }
 
     private static void addCommandLinePropertiesToBinding(binding) {
