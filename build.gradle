@@ -3,7 +3,6 @@ plugins {
     id 'maven'
     id 'signing'
     id "com.gradle.plugin-publish" version "0.9.7"
-    id 'net.researchgate.release' version '2.3.4'
 }
 
 apply plugin: 'groovy'
