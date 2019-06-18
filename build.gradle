@@ -1,117 +1,19 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
-
 plugins {
     id 'groovy'
     id 'maven'
     id 'signing'
+    id "com.gradle.plugin-publish" version "0.9.7"
+    id 'net.researchgate.release' version '2.3.4'
 }
+
+apply plugin: 'groovy'
+
+def env = System.getProperty("profile") ?: "gradle"
+
+apply from: "profile-${env}.gradle"
 
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
-}
-
-dependencies {
-    implementation gradleApi()
-    implementation localGroovy()
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
-
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier = 'sources'
-}
-
-task javadocJar(type: Jar) {
-    from javadoc
-    classifier = 'javadoc'
-}
-
-javadoc {
-    if (JavaVersion.current().isJava9Compatible()) {
-        options.addBooleanOption('html5', true)
-    }
-    if (JavaVersion.current().isJava8Compatible()) {
-        options.addStringOption('Xdoclint:none', '-quiet')
-    }
-    options {
-        encoding "UTF-8"
-        charSet 'UTF-8'
-        author true
-        version true
-    }
-}
-
-def isReleaseBuild() {
-    return VERSION_NAME.contains("SNAPSHOT") == false
-}
-
-def getRepositoryUsername() {
-    return hasProperty('oss_username') ? oss_username : ""
-}
-
-def getRepositoryPassword() {
-    return hasProperty('oss_password') ? oss_password : ""
-}
-
-afterEvaluate { project ->
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-                pom.groupId = project.group
-                pom.artifactId = project.name
-                pom.version = project.version
-
-                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-                }
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-                }
-
-                pom.project {
-                    name "lodsve archetype"
-                    packaging jar
-                    description "Gradle plugin that creates projects from your own cookie cutter"
-                    url "https://github.com/lodsve/lodsve-gradle-archetype-plugin"
-
-                    scm {
-                        url "git@github.com:lodsve/lodsve-gradle-archetype-plugin.git"
-                        connection "scm:git:git@github.com:lodsve/lodsve-gradle-archetype-plugin.git"
-                        developerConnection "scm:git:git@github.com:lodsve/lodsve-gradle-archetype-plugin.git"
-                    }
-
-                    licenses {
-                        license {
-                            name "GNU General Public License version 3"
-                            url "https://opensource.org/licenses/GPL-3.0"
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id "sunhao"
-                            name "孙昊"
-                            email "sunhao.java@gmail.com"
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    signing {
-        required { gradle.taskGraph.hasTask("uploadArchives") }
-        sign configurations.archives
-    }
 }
