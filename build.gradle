@@ -2,12 +2,12 @@ plugins {
     id 'groovy'
     id 'maven'
     id 'signing'
-    id "com.gradle.plugin-publish" version "0.9.7"
+    id "com.gradle.plugin-publish" version "0.12.0"
 }
 
 apply plugin: 'groovy'
 
-def env = System.getProperty("profile") ?: "gradle"
+def env = System.getProperty("profile") ?: "maven"
 
 apply from: "profile-${env}.gradle"
 

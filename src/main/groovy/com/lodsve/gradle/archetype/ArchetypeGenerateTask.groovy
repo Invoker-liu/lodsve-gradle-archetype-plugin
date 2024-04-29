@@ -26,6 +26,7 @@ class ArchetypeGenerateTask extends DefaultTask {
     create() {
         String projectGroup = getParam('group', 'Please enter the group name.')
         String projectName = getParam('name', 'Please enter the project name.')
+        String packageName = getParam('packageName', "Please enter the package name , use '.' split folder name.")
         String projectVersion = getParam('version', 'Please enter the version name', '1.0.0-SNAPSHOT')
         String author = getParam('author', 'Please enter the your name', 'Administrator')
         String port = getParam('port', 'Please enter the service port', '8080')
@@ -36,6 +37,7 @@ class ArchetypeGenerateTask extends DefaultTask {
         Map binding = [
                 'groupId'    : projectGroup,
                 'artifactId' : projectName,
+                'packageName': packageName,
                 'version'    : projectVersion,
                 'author'     : author,
                 'port'       : port,
@@ -55,14 +57,8 @@ class ArchetypeGenerateTask extends DefaultTask {
         addCommandLinePropertiesToBinding(binding)
         addPropertyScopedBindings(binding)
 
-        String artifactId = binding.get('artifactId')
-        String groupId = binding.get('groupId')
+        String packageName = binding.get('packageName')
 
-        String[] temp = artifactId.tokenize("-")
-        String lastPackageName = (0 == temp.length) ? artifactId : temp[temp.length - 1]
-        String packageName = groupId + "." + lastPackageName
-
-        !binding.containsKey('packageName') && binding.put('packageName', packageName)
         !binding.containsKey('packagePath') && binding.put('packagePath', packageName.replaceAll("\\.", "/"))
     }
 
