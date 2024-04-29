@@ -1,4 +1,6 @@
 ## gradle-archetype-plugin
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flodsve%2Flodsve-gradle-archetype-plugin.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Flodsve%2Flodsve-gradle-archetype-plugin?ref=badge_shield)
+
 
 Maven archetype like plugin for Gradle. Generating projects from local template.
 
@@ -159,3 +161,6 @@ It follows ant style. The tailing slash for directory is mandatory.
 * Doesn't work with property files that have such escapes: key=https`\`://aaa.bbb.ccc/xxx, remove the `\` escape to have
   it work.
 * In interactive mode, the prompt text got truncated sometimes.
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flodsve%2Flodsve-gradle-archetype-plugin.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Flodsve%2Flodsve-gradle-archetype-plugin?ref=badge_large)
